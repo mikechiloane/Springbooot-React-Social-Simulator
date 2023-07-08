@@ -11,5 +11,6 @@ COPY --from=build /home/app/target/messaging-0.0.1-SNAPSHOT.jar /usr/local/lib/m
 # Expose port 8084 for the application
 EXPOSE 8080
 
+
 # Set the entry point as the Spring Boot application JAR file
 ENTRYPOINT ["java", "-jar", "/usr/local/lib/messaging-0.0.1-SNAPSHOT.jar"]
