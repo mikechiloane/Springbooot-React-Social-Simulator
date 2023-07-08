@@ -5,7 +5,7 @@ COPY pom.xml /home/app
 RUN mvn -f /home/app/pom.xml clean package
 
 # Stage 2: Create the final image with OpenJDK 17
-FROM adoptopenjdk:17-jdk-hotspot
+FROM openjdk:17-jdk
 COPY --from=build /home/app/target/location-0.0.1-SNAPSHOT.jar /usr/local/lib/location-0.0.1-SNAPSHOT.jar
 
 # Expose port 8084 for the application
