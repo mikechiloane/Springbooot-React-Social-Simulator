@@ -14,7 +14,7 @@ public class GateConfig {
         public RouteLocator customRouteLocator(RouteLocatorBuilder builder) {
             return builder.routes()
                     .route("user", r -> r.path("/v1/user/**")
-                            .uri("http://localhost:8083"))
+                            .uri("https://user-service-u1f1.onrender.com"))
                     .route("location", r -> r.path("/v1/location/**")
                             .uri("https://location-service.onrender.com/v1/location"))
                     .route("messaging", r -> r.path("/v1/message/**")
