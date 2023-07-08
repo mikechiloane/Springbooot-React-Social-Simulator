@@ -16,7 +16,7 @@ public class GateConfig {
                     .route("user", r -> r.path("/v1/user/**")
                             .uri("http://localhost:8083"))
                     .route("location", r -> r.path("/v1/location/**")
-                            .uri("http://localhost:8084"))
+                            .uri("https://location-service.onrender.com/v1/location"))
                     .route("messaging", r -> r.path("/v1/message/**")
                             .uri("http://localhost:8085"))
                     .route("websocket_route", r -> r.path("/location/**")
