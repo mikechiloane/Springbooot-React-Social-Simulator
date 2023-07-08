@@ -18,9 +18,9 @@ public class GateConfig {
                     .route("location", r -> r.path("/v1/location/**")
                             .uri("https://location-service.onrender.com/v1/location"))
                     .route("messaging", r -> r.path("/v1/message/**")
-                            .uri("http://localhost:8085"))
+                            .uri("https://messaging-service-1mwa.onrender.com"))
                     .route("websocket_route", r -> r.path("/location/**")
-                            .uri("lb:ws://localhost:8084"))
+                            .uri("https://location-service.onrender.com"))
                     .build();
         }
 
