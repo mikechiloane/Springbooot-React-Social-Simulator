@@ -1,4 +1,4 @@
-FROM eclipse-temurin:17
+FROM maven:eclipse-temurin:17 as build
 COPY src /home/app/src
 COPY pom.xml /home/app
 RUN mvn -f /home/app/pom.xml clean package
