@@ -1,10 +1,10 @@
 FROM eclipse-temurin:17
-
 WORKDIR /app
+COPY . .
+RUN mvn clean package -DskipTests
 
-COPY target/location-0.0.1-SNAPSHOT.jar /app/location-0.0.1-SNAPSHOT.jar
+FROM openjdk:17
+COPY --from=build /target/location-0.0.1-SNAPSHOT.jar /app/location-0.0.1-SNAPSHOT.jar
 
 EXPOSE 8084
-
-# Set the entry point command for the container
-CMD ["java", "-jar","-Dserver.port=8084", "location-0.0.1-SNAPSHOT.jar"]
+ENTRYPOINT ["java","-jar", "location-0.0.1-SNAPSHOT.jar"]
