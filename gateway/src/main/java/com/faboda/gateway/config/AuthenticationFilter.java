@@ -1,6 +1,7 @@
 package com.faboda.gateway.config;
 
 import com.faboda.gateway.feign.AuthClient;
+import feign.Response;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
@@ -46,7 +47,9 @@ public class AuthenticationFilter implements GlobalFilter, Ordered {
     private boolean validateToken(HttpHeaders headers) {
 
        String token = headers.getFirst(HttpHeaders.AUTHORIZATION);
-       if (Objects.isNull(token)) {
+
+        assert token != null;
+        if (token.isEmpty()) {
            return false;
        }
        Response response = authClient.tokenIsValid(token);
