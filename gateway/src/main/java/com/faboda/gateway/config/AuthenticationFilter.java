@@ -51,8 +51,6 @@ public class AuthenticationFilter implements GlobalFilter, Ordered {
        }
        Response response = authClient.tokenIsValid(token);
        return response.status() == HttpStatus.OK.value();
-
-        return true;
     }
 
     @Override
