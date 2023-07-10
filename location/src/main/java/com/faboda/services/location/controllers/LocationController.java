@@ -5,7 +5,6 @@ import com.faboda.services.location.dto.LocationDto;
 import com.faboda.services.location.models.Location;
 import com.faboda.services.location.service.LocationService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.handler.annotation.SendTo;
@@ -33,8 +32,9 @@ public class LocationController {
     }
 
     @MessageMapping("/location")
-    public void sendLocation(@Payload LocationDto locationDto){
-        simpMessagingTemplate.convertAndSend("/topic/location", locationService.getAllLocations().join());
+    @SendTo("/topic/location")
+    public Location send(@Payload Location location) {
+        return location;
     }
 
 
@@ -49,7 +49,9 @@ public class LocationController {
     public Location updateLocation(@RequestBody  LocationDto locationDto){
         simpMessagingTemplate.convertAndSend("/topic/location", locationService.getAllLocations().join());
 
-         return locationService.updateLocation(locationDto).join();
+         Location location = locationService.updateLocation(locationDto).join();
+         simpMessagingTemplate.convertAndSend("/topic/location", locationService.getAllLocations().join());
+         return location;
     }
     
 
