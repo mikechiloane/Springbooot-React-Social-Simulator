@@ -45,12 +45,12 @@ public class AuthenticationFilter implements GlobalFilter, Ordered {
 
     private boolean validateToken(HttpHeaders headers) {
 
-//        String token = headers.getFirst(HttpHeaders.AUTHORIZATION);
-//        if (Objects.isNull(token)) {
-//            return false;
-//        }
-//        Response response = authClient.tokenIsValid(token);
-//        return response.status() == HttpStatus.OK.value();
+       String token = headers.getFirst(HttpHeaders.AUTHORIZATION);
+       if (Objects.isNull(token)) {
+           return false;
+       }
+       Response response = authClient.tokenIsValid(token);
+       return response.status() == HttpStatus.OK.value();
 
         return true;
     }
