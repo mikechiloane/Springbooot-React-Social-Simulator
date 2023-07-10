@@ -26,7 +26,6 @@ public class MessageController {
         simpMessagingTemplate.convertAndSend("/topic/message",messageDto);
         return messageService.sendMessage(messageDto).join();
     }
-
     @MessageMapping("/message")
     @SendTo("/topic/message")
     public MessageDto send(@Payload MessageDto messageDto){
