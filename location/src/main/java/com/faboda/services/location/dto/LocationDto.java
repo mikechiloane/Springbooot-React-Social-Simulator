@@ -11,6 +11,5 @@ public class LocationDto {
     public  String username;
     public  double lng;
     public  double lat;
-
-
+    public String name;
 }

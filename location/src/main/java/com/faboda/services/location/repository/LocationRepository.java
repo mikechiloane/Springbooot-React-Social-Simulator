@@ -13,7 +13,5 @@ public interface LocationRepository extends MongoRepository<Location, String> {
 
         @Query("{ 'username' : ?0 }")
         Location findLocationByUsername(String username);
-
         List<Location> findByUsernameNot(String username);
-
 }

@@ -4,6 +4,7 @@ import com.faboda.services.user.dto.UserDto;
 import com.faboda.services.user.models.User;
 import com.faboda.services.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
@@ -17,8 +18,7 @@ import java.util.logging.Logger;
 public class UserService {
     private final UserRepository userRepository;
     private static  final Logger LOGGER = Logger.getLogger(UserService.class.getName());
-
-
+    private final KafkaTemplate<String,String> kafkaTemplate;
     @Async
     public CompletableFuture<List<User>> getAllUsers() {
         LOGGER.info("getAllUsers");
@@ -33,6 +33,7 @@ public class UserService {
         if(user==null){
            return null;
         }
+
         return CompletableFuture.completedFuture(user);
     }
 
@@ -46,6 +47,7 @@ public class UserService {
             newUser.setUsername(userDto.getUsername());
             User savedUser = userRepository.save(newUser);
             LOGGER.info("User Created");
+            kafkaTemplate.send("user_topic",userDto.getUsername()+","+userDto.getName());
             return CompletableFuture.completedFuture(savedUser);
         } else {
             LOGGER.info("User already exists");

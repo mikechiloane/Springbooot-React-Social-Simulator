@@ -1,6 +1,7 @@
 package com.faboda.services.location.controllers;
 
 
+import com.faboda.services.location.kafka.KafkaProducer;
 import com.faboda.services.location.dto.LocationDto;
 import com.faboda.services.location.models.Location;
 import com.faboda.services.location.service.LocationService;
@@ -21,6 +22,8 @@ public class LocationController {
     private final LocationService locationService;
     private final SimpMessagingTemplate simpMessagingTemplate;
 
+    private final KafkaProducer kafkaProducer;
+
     @GetMapping("/forUser/{username}")
     public Location sendLocationForUser(@PathVariable("username") String username){
         return locationService.getLocation(username).join();
@@ -28,6 +31,7 @@ public class LocationController {
 
     @GetMapping
     public List<Location> getAllLocations(){
+        kafkaProducer.send("location_topic","yebo");
         return locationService.getAllLocations().join();
     }
 
