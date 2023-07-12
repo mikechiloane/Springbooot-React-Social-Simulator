@@ -31,19 +31,28 @@ public class UserService {
         LOGGER.info("getUser");
         User user = userRepository.findByUsername(username);
         if(user==null){
-            User newUser = new User();
-            newUser.setUsername(username);
-            userRepository.save(newUser);
+           return null;
         }
         return CompletableFuture.completedFuture(user);
     }
 
     @Async
-    public CompletableFuture<User> createUser(User user) {
-        LOGGER.info("createUser");
-        User newUser = userRepository.save(user);
-        return CompletableFuture.completedFuture(newUser);
+    public CompletableFuture<User> createUser(UserDto userDto) {
+        LOGGER.info("create User");
+        User existingUser = userRepository.findByUsername(userDto.getUsername());
+        if (existingUser == null) {
+            User newUser = new User();
+            newUser.setName(userDto.getName());
+            newUser.setUsername(userDto.getUsername());
+            User savedUser = userRepository.save(newUser);
+            LOGGER.info("User Created");
+            return CompletableFuture.completedFuture(savedUser);
+        } else {
+            LOGGER.info("User already exists");
+          return CompletableFuture.completedFuture(null);
+        }
     }
+
 
 
 

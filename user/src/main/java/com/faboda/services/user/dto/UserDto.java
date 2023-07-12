@@ -8,4 +8,5 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class UserDto {
     private String username;
+    private String name;
 }
