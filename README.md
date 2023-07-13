@@ -7,6 +7,8 @@
 #
 ##### Gateway : https://gateway-lp2b.onrender.com
 #
+## NB: _Front-end for the simulator will be added soon_
+#
 ## Technologies Used
  - Springboot
  - Kafka - Confluent Clound
