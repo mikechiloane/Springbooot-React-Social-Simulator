@@ -3,7 +3,7 @@
 
 ![Spring Boot Logo](https://user-images.githubusercontent.com/84719774/129191080-723b3b46-4e0b-4aa5-8eb9-654c2c025b18.png)
 
-##### SocialSimulator: A Spring Boot-based social simulator with a message driven and event drivent microservices architecture Simulate social activaities, and interactions. #socialsimulation #microservices.
+### SocialSimulator: A Spring Boot-based social simulator with a message driven and event drivent microservices architecture Simulate social activaities, and interactions. #socialsimulation #microservices.
 #
 ##### Gateway : https://gateway-lp2b.onrender.com
 #
